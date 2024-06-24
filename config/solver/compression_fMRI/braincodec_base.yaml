@@ -1,0 +1,42 @@
+# @package __global__
+
+defaults:
+  - compression_fMRI/default
+  - /model: encodec_fMRI/braincodec_base
+  - override /dset: fMRI/base
+  - _self_
+
+space_dim: 1024
+
+losses:
+  adv: 0.
+  feat: 0.
+  l1: 0.
+  l2: 1.
+balancer:
+  balance_grads: false
+
+adversarial:
+  adversaries: []
+dataset:
+  batch_size: 64
+  segment_duration: 50
+  min_fMRI_duration: 10
+
+evaluate:
+  every: 5
+generate:
+  every: 5
+
+optim:
+  epochs: 400
+  lr: 1e-4
+
+# autocast: true  未実装なので true にしても意味ない
+
+logging:
+  log_wandb: true
+wandb:
+  with_media_logging: true
+  project: fMRI_Encodec # project name
+  name: initial_trial # optional name for the experiment

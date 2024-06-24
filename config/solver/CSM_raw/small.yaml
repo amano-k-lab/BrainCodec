@@ -1,0 +1,36 @@
+# @package __global__
+
+defaults:
+  - CSM_raw/default
+  - /model: lm/csm_raw_lm
+  - override /dset: fMRI/base
+  - _self_
+
+autocast: true
+autocast_dtype: float16
+
+space_dim: 1024
+
+deadlock:
+  use: true  # deadlock detection
+
+dataset:
+  batch_size: 64
+  segment_duration: 50
+  min_fMRI_duration: 10
+
+evaluate:
+  every: 5
+generate:
+  every: 25
+
+optim:
+  epochs: 150  # the same epochs with the paper
+  lr: 5e-4
+
+logging:
+  log_wandb: true
+wandb:
+  with_media_logging: true
+  project: fMRI_raw_CSM # project name
+  name: initial_trial # optional name for the experiment

@@ -1,0 +1,71 @@
+# @package __global__
+
+defaults:
+  - CSM/default
+  - /model: lm/downstream_csm_lm
+  - override /dset: downstream_fMRI/MDTB
+  - _self_
+
+autocast: true
+autocast_dtype: float16
+
+solver: downstream_CSM_fMRI
+
+space_dim: 1024
+num_classes: 26
+
+tokens:
+  padding_with_special_token: true
+
+CSM_pretrained_checkpoint: null
+
+# losses hyperparameters
+accuracy: {}
+f1:
+  num_classes: ${num_classes}
+  average: macro
+
+deadlock:
+  use: true  # deadlock detection
+
+dataset:
+  batch_size: 64
+  sample_on_duration: false
+  segment_duration: 50
+  min_fMRI_duration: 10
+  train:
+    num_samples: 729850 # The number of samples of train is 14597 * 50
+  valid:
+    num_samples: 199050  # The number of samples of valid is 3981 * 50
+  evaluate:
+    batch_size: 512
+    num_samples: 546900  # The number of samples of test is 10938 * 50
+
+evaluate:
+  every: 2
+generate:
+  every: 1000000000  # never
+
+optim:
+  epochs: 4
+  updates_per_epoch: 2000
+  lr: 5e-4
+  max_norm: 1.
+  optimizer: adamw
+  adam:
+    betas: [0.9, 0.999]
+    weight_decay: 0.1
+
+schedule:
+  lr_scheduler: cosine
+  cosine:
+    warmup: 1200  # 1% of all steps. 60 epoch * 2000 steps
+    lr_min_ratio: 0.0
+    cycle_length: 1.0
+
+logging:
+  log_wandb: true
+wandb:
+  with_media_logging: true
+  project: fMRI_downstream_MDTB # project name
+  name: initial_trial # optional name for the experiment

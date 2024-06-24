@@ -1,0 +1,91 @@
+# @package __global__
+
+defaults:
+  - ../default
+  - override /dset: downstream_fMRI/default
+  - _self_
+
+solver: downstream_fMRI
+
+compression_model_checkpoint: ???
+use_layer: null  # layer id for feature extraction, start from 0 to 7 if you use n_q = 8. It should be List[int]
+
+# loss balancing
+losses:
+  accuracy: 0.
+  f1: 0.
+  cross_entropy: 1.
+balancer:
+  balance_grads: false
+  ema_decay: 0.999
+  per_batch_item: true
+  total_norm: 1.
+
+# losses hyperparameters
+cross_entropy: {}
+accuracy: {}
+f1:
+  num_classes: ${num_classes}
+  average: macro
+
+# metrics
+metrics: {}
+
+# data hyperparameters
+dataset:
+  batch_size: 512
+  num_workers: 10
+  segment_duration: 64
+  min_fMRI_duration: null
+  max_fMRI_duration: null
+  sample_w_previous_research: false
+  tr_precision: 0.2
+  max_read_retry: 1
+  max_tr: 256.0
+  return_info: true
+  normalize: false
+  train:
+    num_samples: 10000
+  valid:
+    num_samples: 10000
+  evaluate:
+    batch_size: 32
+    num_samples: 10000
+  generate:
+    batch_size: 16
+    num_samples: 16
+
+# solver hyperparameters
+evaluate:
+  every: 5
+  num_workers: 5
+  metrics:
+    acc: true
+    f1: true
+generate:
+  every: 1000000000  # never
+  num_workers: 5
+  block_num: 2
+
+# checkpointing schedule
+checkpoint:
+  save_last: true
+  save_every: 25
+  keep_last: 10
+  keep_every_states: null
+
+# optimization hyperparameters
+optim:
+  epochs: 200
+  updates_per_epoch: 2000
+  lr: 1e-3
+  max_norm: 1.
+  optimizer: adam
+  adam:
+    betas: [0.9, 0.999]
+    weight_decay: 10.
+  ema:
+    use: false         # whether to use EMA or not
+    updates: 1        # update at every step
+    device: ${device} # device for EMA, can be put on GPU if more frequent updates
+    decay: 0.99       # EMA decay value, if null, no EMA is used

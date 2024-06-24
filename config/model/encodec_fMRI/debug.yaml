@@ -1,0 +1,15 @@
+# @package __global__
+
+defaults:
+  - encodec_fMRI/default
+
+seanet:
+  dimension: 16
+  n_filters: ${space_dim}
+  ratios: []
+  lstm: 0
+
+rvq:
+  n_q: 64
+  bins: 8192
+  q_dropout: false

@@ -1,0 +1,7 @@
+# @package __global__
+
+datasource:
+  train: egs/fMRI_downstream/HCP/train
+  valid: egs/fMRI_downstream/HCP/valid
+  evaluate: egs/fMRI_downstream/HCP/test
+  generate: egs/fMRI_downstream/HCP/test

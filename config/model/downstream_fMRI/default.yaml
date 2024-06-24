@@ -1,0 +1,8 @@
+# @package __global__
+
+downstream_fMRI_model: linearbaseline
+
+linear:
+  space_dim: ${space_dim}
+  segment_duration: ${dataset.segment_duration}
+  num_classes: ${num_classes}

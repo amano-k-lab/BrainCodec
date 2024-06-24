@@ -1,0 +1,49 @@
+# @package __global__
+
+defaults:
+  - downstream_fMRI/default
+  - /model: downstream_fMRI/default
+  - override /dset: downstream_fMRI/MDTB
+  - _self_
+
+space_dim: 1024
+num_classes: 26
+compression_model_checkpoint: null
+
+dataset:
+  segment_duration: 50
+  min_fMRI_duration: 10
+  train:
+    num_samples: 729850 # The number of samples of train is 14597 * 50
+  valid:
+    num_samples: 199050  # The number of samples of valid is 3981 * 50
+  evaluate:
+    batch_size: 512
+    num_samples: 546900  # The number of samples of test is 10938 * 50
+
+evaluate:
+  every: 2
+
+optim:
+  epochs: 2
+  updates_per_epoch: 2000
+  lr: 1e-4
+  max_norm: 1.
+  optimizer: adamw
+  adam:
+    betas: [0.9, 0.999]
+    weight_decay: 1.
+
+schedule:
+  lr_scheduler: cosine
+  cosine:
+    warmup: 1200  # 1% of all steps. 60 epoch * 2000 steps
+    lr_min_ratio: 0.0
+    cycle_length: 1.0
+
+logging:
+  log_wandb: true
+wandb:
+  with_media_logging: true
+  project: fMRI_downstream_MDTB # project name
+  name: init # optional name for the experiment

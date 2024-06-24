@@ -1,0 +1,33 @@
+# @package __global__
+
+defaults:
+  - compression_fMRI/default
+  - /model: encodec_fMRI/debug
+  - override /dset: fMRI/base
+  - _self_
+
+space_dim: 1024
+
+losses:
+  adv: 0.
+  feat: 0.
+  l1: 1.
+balancer:
+  balance_grads: false
+
+adversarial:
+  adversaries: []
+
+dataset:
+  train:
+    num_samples: 50000
+
+autocast: true
+
+logging:
+  level: DEBUG
+  log_wandb: true
+wandb:
+  with_media_logging: true
+  project: fMRI_Encodec # project name
+  name: debug # optional name for the experiment

@@ -1,0 +1,67 @@
+# @package __global__
+
+compression_model: encodec_fMRI
+
+encodec:
+  autoencoder: seanet_fMRI
+  quantizer: rvq
+  space_dim: ${space_dim}
+  causal: false
+  frame_rate: ${dataset.segment_duration}
+  without_tr: false
+
+
+seanet:
+  dimension: 256
+  space_dim: ${space_dim}
+  causal: ${encodec.causal}
+  n_filters: 4096
+  n_residual_layers: 0
+  ratios: [0.5,0.5,0.5]
+  activation: ELU
+  activation_params: {"alpha": 1.}
+  norm: weight_norm
+  norm_params: {}
+  kernel_size: 7
+  residual_kernel_size: 3
+  updownsample_kernel_size: 2
+  last_kernel_size: 7
+  dilation_base: 2
+  pad_mode: constant
+  true_skip: true
+  compress: 2
+  time_extension_ratios: [1, 1, 1]
+  lstm: 2
+  bidiractional: false
+  disable_norm_outer_blocks: 0
+  trim_right_ratio: 1.0
+  tr_emb_dim: 256
+  max_tr: ${dataset.max_tr}
+  tr_precision: ${dataset.tr_precision}
+  add_noise: false
+  noise_lstm: 0
+  noise_type: gaussian
+  # Specific encoder or decoder params.
+  # You can also override any param for the encoder or decoder only
+  # by using Hydra `+param=` syntax, i.e.`
+  # `+seanet.decoder.n_filters=64`.
+  decoder:
+    ratios: ${seanet.ratios}
+    use_inverse_ratios: false
+    use_transpose: false
+    final_activation: null
+    final_activation_params: null
+  encoder: {}
+
+rvq:
+  n_q: 8
+  q_dropout: false
+  bins: 1024
+  decay: 0.99
+  kmeans_init: true
+  kmeans_iters: 50
+  threshold_ema_dead_code: 2
+  orthogonal_reg_weight: 0.0
+  orthogonal_reg_active_codes_only: false
+
+no_quant: {}
