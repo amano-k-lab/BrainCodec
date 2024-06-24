@@ -96,12 +96,12 @@ UMAP plots of the codebook acquired through the training of BrainCodec. You can 
 ### 4.2.2: Performance Changes with Varying Layer Numbers
 Code to check performance changes on the HCP dataset when the number of layers is varied. You can output results by specifying the CSM checkpoint trained on HCP data and the layer number to use in `braincodec/422_calc_acc_for_each_layer_with_CSM.py`. By specifying the `rest_codec_model_path` option, you can replace the codebook of the codec model with only the codebook specified by BrainCodec.
 
-### 4.2.2 and F3: Visualization and Evaluation of Codec Model Reconstruction
+### 4.2.2 and F.3: Visualization and Evaluation of Codec Model Reconstruction
 By specifying the CSM checkpoint and the path to BrainVAE in `braincodec/422_F3_plot_evaluate_fMRI_data.py`, you can visualize the reconstructed data by BrainCodec and BrainVAE along with the Ground Truth data.
 
 In `braincodec/422_F3_create_mean_fMRI_data.py`, you can create an average image for a specific task by specifying the target task label and the trial name to use for reconstruction, and then calculate the L1 distance between the codec model's reconstructed fMRI and the average task image.
 
-### D2: fMRI Generation with CSM
+### D.2: fMRI Generation with CSM
 In `braincodec/D2_rawcsm_generate.py`, you can generate the continuation of a given fMRI data conditioned on the CSM checkpoint.
 
 ### F.2: Codebook Distance Using Sinkhorn Algorithm
