@@ -1,11 +1,9 @@
 # BrainCraft
 
-BrainCraft は AudioCraft をベースとした pytorch ライブラリです．
-BrainCraft は現在 BrainCodec の推論・訓練コードを含んでいます．
-
+BrainCraft is a PyTorch library based on AudioCraft. BrainCraft currently includes the inference and training code for BrainCodec.
 
 ## Installation
-BrainCraft requires Python 3.9, PyTorch 2.1.0. To install BrainCraft, you can run the following:
+BrainCraft requires Python 3.9 and PyTorch 2.1.0. To install BrainCraft, you can run the following:
 
 ```shell
 # Best to make sure you have torch installed first, in particular before installing xformers.
@@ -33,7 +31,8 @@ At the moment, BrainCraft contains the training code and inference code for:
 
 For the general framework of BrainCraft, please cite the following.
 ```
+Not yet published
 ```
 
 ## Acknowledgement
-このリポジトリは [AudioCraft](https://github.com/facebookresearch/audiocraft) を元に実装されています．
+This repository is implemented based on [AudioCraft](https://github.com/facebookresearch/audiocraft).

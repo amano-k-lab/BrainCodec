@@ -4,10 +4,8 @@ import argparse
 import typing as tp
 from pathlib import Path
 
-import imageio
 import matplotlib.pyplot as plt
 import nibabel as nb
-import numpy as np
 import torch
 from nilearn import plotting
 from nilearn.datasets import fetch_atlas_difumo
