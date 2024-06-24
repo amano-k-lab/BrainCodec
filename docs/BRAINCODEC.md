@@ -104,5 +104,5 @@ In `braincodec/422_F3_create_mean_fMRI_data.py`, you can create an average image
 ### D2: fMRI Generation with CSM
 In `braincodec/D2_rawcsm_generate.py`, you can generate the continuation of a given fMRI data conditioned on the CSM checkpoint.
 
-F.2: Codebook Distance Using Sinkhorn Algorithm
+### F.2: Codebook Distance Using Sinkhorn Algorithm
 Code to implement the Sinkhorn algorithm. Specify the path to the checkpoint for the Encodec path. If not specified, it defaults to a plot from Gaussian noise. After calculating with `braincodec/F2_sinkhorn_algorithm/compare_two_encodec.py`, specify the data you want to compare and plot it with `braincodec/F2_sinkhorn_algorithm/plot_all_data.py`.
